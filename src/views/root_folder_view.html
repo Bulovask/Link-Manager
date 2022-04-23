@@ -1,4 +1,7 @@
 <section ng-controller="rootFolderCtrl">
+	<header>
+		<button ng-click="back()">voltar</button>
+	</header>
 	<section class="object-list">
 		<div class="item" ng-repeat="item in currentFolder" style="background-image: url({{item.image}}), url(images/{{item.type == 'link' ? 'link.svg' : 'folder.svg'}}); background-color: {{item.color}}">
 			<div class="item-type" style="background-image: url(images/{{item.type == 'link' ? 'link.svg' : 'folder.svg'}})"></div>
