@@ -1,11 +1,42 @@
 <section ng-controller="rootFolderCtrl">
-	<header>
-		<button ng-click="back()">voltar</button>
-	</header>
-	<section class="object-list">
-		<div class="item" ng-repeat="item in currentFolder" style="background-image: url({{item.image}}), url(images/{{item.type == 'link' ? 'link.svg' : 'folder.svg'}}); background-color: {{item.color}}">
-			<div class="item-type" style="background-image: url(images/{{item.type == 'link' ? 'link.svg' : 'folder.svg'}})"></div>
-			<span class="item-name" ng-bind="item.name" ng-click="itemAction(item, $index)"></span>
+	<header id="navbar">
+		<div>
+			<span class="path" ng-repeat="folder in path" ng-bind="folder.name" ng-click="go(folder, $index)"></span>
 		</div>
+		<button class="btn square-small" ng-click="back()">&lt</button>
+		<button class="btn square-small" ng-click="next()">&gt</button>
+	</header>
+	
+	<section id="object-list-container">
+		<div class="item" ng-repeat="item in currentFolder.referenceList" style="background-image: url({{item.image}}), url(images/{{item.type == 'link' ? 'link.svg' : 'folder.svg'}}); background-color: {{item.color}}">
+			<div class="item-type" style="background-image: url(images/{{item.type == 'link' ? 'link.svg' : 'folder.svg'}})"></div>
+			<span class="item-name" ng-bind="item.name" ng-click="itemAction(item, $index)" ondbclick="alert(9)"></span>
+		</div>
+		<div ng-hide="currentFolder.referenceList.length" style="width: 100%; height: 100vh; display: flex; justify-content: center; align-items: center;">
+			Aqui está vazio...
+		</div>
+	</section>
+	
+	<button type="button" class="btn-float" ng-click="newItemContainerVisible = !newItemContainerVisible"></button>
+	
+	<div ng-show="newItemContainerVisible" style="background: #00000088; width: 100vw; height: 100vh; position: fixed; top: 0; left: 0; z-index: 0"></div>
+	
+	<section id="new-item-container" ng-if="newItemContainerVisible">
+		<form name="newItemForm">
+			<select id="selectTypeField" ng-required ng-model="itemEdit.type">
+				<option value="link" selected>Link</option>
+				<option value="folder">Folder</option>
+			</select>
+			<div class="field-container">
+				<label class="top-tab" for="nameField">NOME</label>
+				<input id="nameField" class="width-fill" type="text" ng-model="itemEdit.name"/>
+			</div>
+			<div class="field-container" ng-show="itemEdit.type == 'link'">
+				<label class="top-tab" for="urlField">URL</label>
+				<input id="urlField" class="width-fill" type="text" ng-model="itemEdit.url"/>
+			</div>
+			
+			<button class="btn width-fill" type="button" ng-click="addItem(itemEdit)">Salvar</button>
+		</form>
 	</section>
 </section>

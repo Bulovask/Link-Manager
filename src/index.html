@@ -11,6 +11,26 @@
 		<script src="js/controllers/rootFolderCtrl.js"></script>
 	</head>
 	<body>
+		<script type="module">
+			// Import the functions you need from the SDKs you need
+			import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.11/firebase-app.js";
+			// TODO: Add SDKs for Firebase products that you want to use
+			// https://firebase.google.com/docs/web/setup#available-libraries
+			// Your web app's Firebase configuration
+			const firebaseConfig = {
+				apiKey: "AIzaSyAlrpsglHKNXr2Tlcv6A1n562jR17EEDaI",
+				authDomain: "teste-67e89.firebaseapp.com",
+			    databaseURL: "https://teste-67e89.firebaseio.com",
+			    projectId: "teste-67e89",
+			    storageBucket: "teste-67e89.appspot.com",
+			    messagingSenderId: "318304977461",
+			    appId: "1:318304977461:web:f1393d77e2ddb82ae9a77c"
+			};
+			
+			// Initialize Firebase
+			const app = initializeApp(firebaseConfig);
+		</script>
+		
 		<ng-include src="'views/root_folder_view.html'"></ng-include>
 	</body>
 </html>
