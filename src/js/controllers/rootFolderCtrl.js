@@ -54,6 +54,10 @@ angular.module("LinkManager").controller("rootFolderCtrl", function($scope, Link
 			$scope.newItemContainerVisible = false;
 			$scope.itemEdit = {};
 			$scope.itemEdit.type = 'link';
+			
+			newItem.description = item.description;
+			newItem.image = item.image;
+			newItem.color = item.color ? item.color : newItem.color;
 		}
 	}
 });

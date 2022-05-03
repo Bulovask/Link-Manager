@@ -23,7 +23,7 @@
 	
 	<section id="new-item-container" ng-if="newItemContainerVisible">
 		<form name="newItemForm">
-			<select id="selectTypeField" ng-required ng-model="itemEdit.type">
+			<select class="width-fill btn" id="selectTypeField" ng-required ng-model="itemEdit.type">
 				<option value="link" selected>Link</option>
 				<option value="folder">Folder</option>
 			</select>
@@ -34,6 +34,18 @@
 			<div class="field-container" ng-show="itemEdit.type == 'link'">
 				<label class="top-tab" for="urlField">URL</label>
 				<input id="urlField" class="width-fill" type="text" ng-model="itemEdit.url"/>
+			</div>
+			<div class="field-container">
+				<label class="top-tab" for="descriptionField">DESCRIÇÃO</label>
+				<textarea id="descriptionField" class="width-fill" ng-model="itemEdit.description"></textarea>
+			</div>
+			<div class="field-container">
+				<label class="top-tab" for="colorField">COR</label>
+				<input id="colorField" type="color" class="width-fill" ng-model="itemEdit.color"/>
+			</div>
+			<div class="field-container">
+				<label class="top-tab" for="imageField">URL DA IMAGEM</label>
+				<input id="imageField" type="text" class="width-fill" ng-model="itemEdit.image"/>
 			</div>
 			
 			<button class="btn width-fill" type="button" ng-click="addItem(itemEdit)">Salvar</button>

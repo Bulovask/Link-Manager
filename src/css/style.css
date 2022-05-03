@@ -11,7 +11,7 @@ input {
 	padding: 4px;
 }
 
-button {
+button, select {
 	padding: 8px;
 }
 
@@ -118,6 +118,7 @@ button {
 	border-top: 1px solid #aaa;
 	min-height: 50vh;
 	max-height: 90vh;
+	overflow: scroll;
 }
 
 .field-container {
@@ -125,8 +126,9 @@ button {
 }
 
 .top-tab {
+    display: inline-block;
 	border: 1px solid #666;
-	border-radius: 5px 5px 0 0;
+	border-radius: 5px 50px 0 0;
 	padding: 2px;
 	padding-right: 10px;
 }
