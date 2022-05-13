@@ -5,8 +5,10 @@
 **[Visualize](https://bulovask.github.io/Link-Manager/src)**
 
 ## Ideia inicial
-O funcionamento será baseado em objetos do tipo LinkObject e FolderObject:
+O funcionamento será baseado em objetos do tipo Link e Folder:
 
-LinkObject: eles terão uma url de referência, um nome de exibição e uma foto opcional, podendo ser adicionado uma cor também.
+Link: eles terão uma url de referência, um nome de exibição e uma foto opcional, podendo ser adicionado uma cor também.
 
-FolderObject: eles terão uma lista de outros objetos, um nome de exibição, uma foto opcional e uma cor.
+Folder: eles terão uma lista de outros objetos, um nome de exibição, uma foto opcional e uma cor.
+
+## Atualizações

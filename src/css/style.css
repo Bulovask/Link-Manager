@@ -1,7 +1,8 @@
 body {
 	position: relative;
+	box-sizing: border-box;
 	height: 100vh;
-	margin-top: 0;
+	margin: 0 10px;
 	padding-top: 0;
 }
 
@@ -17,6 +18,7 @@ button, select {
 
 #object-list-container {
 	position: relative;
+	box-sizing: border-box;
 }
 
 .item {
@@ -59,6 +61,15 @@ button, select {
 	border-radius: 8px;
 }
 
+.btn-item-edit {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: red;
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
 #navbar {
 	box-sizing: border-box;
 	position: sticky;
@@ -66,8 +77,14 @@ button, select {
 	z-index: 1;
 	background-color: #eee;
 	border: 1px solid black;
-	border-radius: 8px;
+	border-radius: 10px 30px 10px 30px;
 	padding: 7px;
+}
+
+.path-container {
+    display: flex;
+    overflow: scroll;
+    margin-bottom: 2.5px;
 }
 
 .path {
@@ -78,17 +95,34 @@ button, select {
 
 .path:after {
 	content: "/";
+	color: #444;
 }
 
 .path:last-of-type {
-	background-color: #ffa;
+	background-color: #eee;
 	border: 1px solid #000;
 	border-radius: 3px;
-	padding: 0 0.5ch;
+	padding: 0 0.1ch;
 }
 
 .path:last-of-type:after {
 	content: "";
+}
+
+.back-path, .next-path {
+    background-size: 100% 100%;
+    width: 48px;
+    height: 24px;
+}
+
+.back-path {
+    border-radius: 10px 0 0 30px !important;
+    background-image: url("../images/back.svg");
+}
+
+.next-path {
+    border-radius: 0 30px 10px 0 !important;
+    background-image: url("../images/next.svg");
 }
 
 .btn {
@@ -100,12 +134,7 @@ button, select {
 	item-align: center;
 }
 
-.square-small {
-	width: 28px;
-	height: 28px;
-}
-
-#new-item-container {
+#new-item-container, #edit-item-container {
 	z-index: 2;
 	box-sizing: border-box;
 	position: fixed;

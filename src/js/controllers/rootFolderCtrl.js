@@ -1,6 +1,6 @@
-angular.module("LinkManager").controller("rootFolderCtrl", function($scope, Link, Folder) {
+angular.module("LinkManager").controller("rootFolderCtrl", function($scope, Link, Folder, save, load) {
 	//object-list-container
-	$scope.tree = new Folder("root", []);
+	$scope.tree = load();
 	$scope.path = [$scope.tree];
 	$scope.currentFolder = $scope.tree;
 	
@@ -38,10 +38,10 @@ angular.module("LinkManager").controller("rootFolderCtrl", function($scope, Link
 		$scope.currentFolder = folder;
 	}
 	
-	//new-item-container
+	//#new-item-container
 	$scope.newItemContainerVisible = false;
-	$scope.itemEdit = {};
-	$scope.itemEdit.type = 'link';
+	$scope.newItemData = {};
+	$scope.newItemData.type = 'link';
 	
 	$scope.addItem = item => {
 		let newItem;
@@ -52,12 +52,66 @@ angular.module("LinkManager").controller("rootFolderCtrl", function($scope, Link
 		if(newItem && item.name) {
 			$scope.currentFolder.referenceList.push(newItem);
 			$scope.newItemContainerVisible = false;
-			$scope.itemEdit = {};
-			$scope.itemEdit.type = 'link';
+			$scope.newItemData = {};
+			$scope.newItemData.type = 'link';
 			
 			newItem.description = item.description;
 			newItem.image = item.image;
 			newItem.color = item.color ? item.color : newItem.color;
+			newItem.parent = $scope.currentFolder;
+			
+			save($scope.tree);
 		}
+	}
+	
+	//#edit-item-container
+	$scope.editItemContainerVisible = false;
+	$scope.editItemData = {};
+	$scope.currentEditItem = {};
+	
+	$scope.editItem = (item) => {
+	    $scope.editItemContainerVisible = !$scope.editItemContainerVisible;
+	    $scope.currentEditItem = item;
+	    if($scope.editItemContainerVisible) {
+    	    const editItemData = $scope.editItemData;
+    	    const keys = ["type", "name", "url", "description", "image", "color"];
+    	    keys.forEach(k => {
+    	        if(item[k]) {
+    	            editItemData[k] = item[k];
+    	        }
+    	    });
+	    }
+	    else {
+	        $scope.editItemData = {};
+	    }
+	}
+	
+	$scope.saveEditItem = () => {
+	    const currentEditItem = $scope.currentEditItem;
+	    const keys = ["type", "name", "url", "description", "image", "color"];
+	    keys.forEach(k => {
+	        currentEditItem[k] = $scope.editItemData[k];
+	    });
+	    
+	    $scope.editItemData = {};
+	    $scope.currentEditItem = {};
+	    $scope.editItemContainerVisible = false;
+	    
+	    save($scope.tree);
+	}
+	
+	$scope.deleteEditItem = () => {
+	    const currentEditItem = $scope.currentEditItem;
+	    const parent = currentEditItem.parent || $scope.tree;
+	    const index = parent.referenceList.indexOf(currentEditItem);
+	    
+	    if(index != -1) {
+	        parent.referenceList.splice(index, 1);
+	        $scope.editItemData = {};
+    	    $scope.currentEditItem = {};
+    	    $scope.editItemContainerVisible = false;
+    	    
+    	    save($scope.tree);
+	    }
 	}
 });
